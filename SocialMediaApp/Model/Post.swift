@@ -97,6 +97,57 @@ class Post {
         }
     }
     
+    func deletePost() {
+        
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
+        
+        // delete post img from the database storage
+        Storage.storage().reference(forURL: self.postImageUrl).delete(completion: nil)
+        
+        // delete the post from followrs structure
+        USER_FOLLOWER_REF.child(currentUid).observe(.childAdded) { (snapshot) in
+            let followerUid = snapshot.key
+            USER_FEED_REF.child(followerUid).child(self.postId).removeValue()
+        }
+        
+        // delete the post from current user structure
+        USER_FEED_REF.child(currentUid).child(postId).removeValue()
+        
+        // delete the post from user post srtructure
+        USER_POSTS_REF.child(currentUid).child(postId).removeValue()
+        
+        // delete likes from structure
+        POST_LIKES_REF.child(postId).observe(.childAdded) { (snapshot) in
+            let uid = snapshot.key
+            
+            USER_LIKES_REF.child(uid).child(self.postId).observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let notificationId = snapshot.value as? String else {return}
+                
+                NOTIFICATIONS_REF.child(self.ownerUid).child(notificationId).removeValue(completionBlock: { (err, ref) in
+                    
+                    POST_LIKES_REF.child(self.postId).removeValue()
+                    
+                    USER_LIKES_REF.child(uid).child(self.postId).removeValue()
+                    
+                })
+            })
+        }
+        
+        let words = caption.components(separatedBy: .whitespacesAndNewlines)
+        for var word in words {
+            if word.hasPrefix("#") {
+                
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                word = word.trimmingCharacters(in: .symbols)
+                
+                HASHTAG_POST_REF.child(word).child(postId).removeValue()
+            }
+        }
+        
+        COMMENT_REF.child(postId).removeValue()
+        POSTS_REF.child(postId).removeValue()
+    }
+    
     func sendLikeNotificationToServer() {
         
         guard let currentUid = Auth.auth().currentUser?.uid else {return}

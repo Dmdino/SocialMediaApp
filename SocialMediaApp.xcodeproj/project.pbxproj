@@ -27,6 +27,7 @@
 		D8521A43226CF20700ECCF98 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8521A42226CF20700ECCF98 /* Notification.swift */; };
 		D88E7E5C2291D137006CC368 /* HashtagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E7E5B2291D137006CC368 /* HashtagController.swift */; };
 		D88E7E5E2291D349006CC368 /* HashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E7E5D2291D349006CC368 /* HashtagCell.swift */; };
+		D8C9039822AD574A00B5683B /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9039722AD574A00B5683B /* EditProfileController.swift */; };
 		D8E3833A22589D9B0023E510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3833922589D9B0023E510 /* AppDelegate.swift */; };
 		D8E3833F22589D9B0023E510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8E3833D22589D9B0023E510 /* Main.storyboard */; };
 		D8E3834122589D9F0023E510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8E3834022589D9F0023E510 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		D8521A42226CF20700ECCF98 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D88E7E5B2291D137006CC368 /* HashtagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagController.swift; sourceTree = "<group>"; };
 		D88E7E5D2291D349006CC368 /* HashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagCell.swift; sourceTree = "<group>"; };
+		D8C9039722AD574A00B5683B /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
 		D8E3833622589D9B0023E510 /* SocialMediaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialMediaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E3833922589D9B0023E510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8E3833E22589D9B0023E510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			children = (
 				D8E3836322591C7F0023E510 /* UserProfileVC.swift */,
 				D8E38375225A8B830023E510 /* FollowLikeVC.swift */,
+				D8C9039722AD574A00B5683B /* EditProfileController.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8E3837C225BEC510023E510 /* SelectImageVC.swift in Sources */,
+				D8C9039822AD574A00B5683B /* EditProfileController.swift in Sources */,
 				D8E38380225BEE2C0023E510 /* SelectPhotoHeader.swift in Sources */,
 				D8521A3722621F3300ECCF98 /* CustomImageView.swift in Sources */,
 				D8E38374225A42730023E510 /* Protocols.swift in Sources */,
