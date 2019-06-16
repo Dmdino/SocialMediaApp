@@ -62,6 +62,17 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         configurenavigationBar()
         
         observeMessages()
+        
+        configureKeyboardObservers()
+        
+        // temprorary stuf
+        let tap: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+        
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardDismiss() {
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,6 +135,10 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.pushViewController(userProfileController, animated: true)
     }
     
+    @objc func handleKeyboardDidShow() {
+        scrollToBottom()
+    }
+    
     // this is how we created the frame for our textview based on the message what we have (found this on stack overflow)
     func estimateFrameForText(_ text: String) -> CGRect {
         let size = CGSize(width: 200, height: 1000)
@@ -162,6 +177,17 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
         
         navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    func configureKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+    }
+    
+    func scrollToBottom() {
+        if messages.count > 0 {
+            let indexPath = IndexPath(item: messages.count - 1, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
     
     // MARK: - API
@@ -210,3 +236,4 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
 }
+

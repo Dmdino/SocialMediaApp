@@ -28,6 +28,10 @@
 		D88E7E5C2291D137006CC368 /* HashtagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E7E5B2291D137006CC368 /* HashtagController.swift */; };
 		D88E7E5E2291D349006CC368 /* HashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88E7E5D2291D349006CC368 /* HashtagCell.swift */; };
 		D8C9039822AD574A00B5683B /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9039722AD574A00B5683B /* EditProfileController.swift */; };
+		D8C9039B22B5157F00B5683B /* CommentInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9039A22B5157F00B5683B /* CommentInputAccesoryView.swift */; };
+		D8C9039D22B515BC00B5683B /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9039C22B515BC00B5683B /* InputTextView.swift */; };
+		D8C9039F22B531B400B5683B /* MessageInputAccesoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9039E22B531B400B5683B /* MessageInputAccesoryView.swift */; };
+		D8C903A122B531EF00B5683B /* MessageInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C903A022B531EF00B5683B /* MessageInputTextView.swift */; };
 		D8E3833A22589D9B0023E510 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3833922589D9B0023E510 /* AppDelegate.swift */; };
 		D8E3833F22589D9B0023E510 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8E3833D22589D9B0023E510 /* Main.storyboard */; };
 		D8E3834122589D9F0023E510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8E3834022589D9F0023E510 /* Assets.xcassets */; };
@@ -77,6 +81,10 @@
 		D88E7E5B2291D137006CC368 /* HashtagController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagController.swift; sourceTree = "<group>"; };
 		D88E7E5D2291D349006CC368 /* HashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagCell.swift; sourceTree = "<group>"; };
 		D8C9039722AD574A00B5683B /* EditProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileController.swift; sourceTree = "<group>"; };
+		D8C9039A22B5157F00B5683B /* CommentInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputAccesoryView.swift; sourceTree = "<group>"; };
+		D8C9039C22B515BC00B5683B /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		D8C9039E22B531B400B5683B /* MessageInputAccesoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputAccesoryView.swift; sourceTree = "<group>"; };
+		D8C903A022B531EF00B5683B /* MessageInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputTextView.swift; sourceTree = "<group>"; };
 		D8E3833622589D9B0023E510 /* SocialMediaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialMediaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E3833922589D9B0023E510 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8E3833E22589D9B0023E510 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,19 +143,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D825D3402284397900E9E01D /* Messages */ = {
+		D825D3402284397900E9E01D /* MessagesControllers */ = {
 			isa = PBXGroup;
 			children = (
 				D825D341228446F900E9E01D /* MessagesVC.swift */,
 				D825D34622858CD000E9E01D /* NewMessageController.swift */,
 				D825D34C2285ABAF00E9E01D /* ChatController.swift */,
 			);
-			path = Messages;
+			path = MessagesControllers;
 			sourceTree = "<group>";
 		};
 		D825D34322844BDD00E9E01D /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				D8C9039E22B531B400B5683B /* MessageInputAccesoryView.swift */,
+				D8C903A022B531EF00B5683B /* MessageInputTextView.swift */,
 				D825D34422844C2E00E9E01D /* MessageCell.swift */,
 				D825D34822858E2700E9E01D /* NewMessageCell.swift */,
 				D825D34E2285ADE600E9E01D /* ChatCell.swift */,
@@ -171,6 +181,16 @@
 				D88E7E5D2291D349006CC368 /* HashtagCell.swift */,
 			);
 			path = Social;
+			sourceTree = "<group>";
+		};
+		D8C9039922B5151A00B5683B /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				D8521A3A226B21D400ECCF98 /* CommentVC.swift */,
+				D8C9039A22B5157F00B5683B /* CommentInputAccesoryView.swift */,
+				D8C9039C22B515BC00B5683B /* InputTextView.swift */,
+			);
+			path = Comments;
 			sourceTree = "<group>";
 		};
 		D8E3832D22589D9B0023E510 = {
@@ -217,7 +237,7 @@
 				D8E38367225931FD0023E510 /* Search */,
 				D8E38365225928580023E510 /* Login */,
 				D8E3836A225932480023E510 /* UserProfile */,
-				D825D3402284397900E9E01D /* Messages */,
+				D825D3402284397900E9E01D /* MessagesControllers */,
 				D8E38359225917800023E510 /* MainTabVC.swift */,
 			);
 			path = Controller;
@@ -267,8 +287,8 @@
 		D8E383662259287B0023E510 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				D8C9039922B5151A00B5683B /* Comments */,
 				D8E3835B22591B820023E510 /* FeedVC.swift */,
-				D8521A3A226B21D400ECCF98 /* CommentVC.swift */,
 				D88E7E5B2291D137006CC368 /* HashtagController.swift */,
 			);
 			path = Feed;
@@ -438,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C9039D22B515BC00B5683B /* InputTextView.swift in Sources */,
 				D8E3837C225BEC510023E510 /* SelectImageVC.swift in Sources */,
 				D8C9039822AD574A00B5683B /* EditProfileController.swift in Sources */,
 				D8E38380225BEE2C0023E510 /* SelectPhotoHeader.swift in Sources */,
@@ -451,12 +472,14 @@
 				D8E3836222591C5C0023E510 /* NotificationsVC.swift in Sources */,
 				D825D33F227F50EA00E9E01D /* SearchPostCell.swift in Sources */,
 				D8E3836022591C150023E510 /* UploadPostVC.swift in Sources */,
+				D8C903A122B531EF00B5683B /* MessageInputTextView.swift in Sources */,
 				D825D34922858E2700E9E01D /* NewMessageCell.swift in Sources */,
 				D8E38376225A8B830023E510 /* FollowLikeVC.swift in Sources */,
 				D8E3837E225BEDC30023E510 /* SelectPhotoCell.swift in Sources */,
 				D825D34722858CD000E9E01D /* NewMessageController.swift in Sources */,
 				D8E38370225A23970023E510 /* SearchUserCell.swift in Sources */,
 				D88E7E5E2291D349006CC368 /* HashtagCell.swift in Sources */,
+				D8C9039F22B531B400B5683B /* MessageInputAccesoryView.swift in Sources */,
 				D8521A3D226B23C900ECCF98 /* CommentCell.swift in Sources */,
 				D8521A352262110D00ECCF98 /* UserPostCell.swift in Sources */,
 				D8E3836422591C7F0023E510 /* UserProfileVC.swift in Sources */,
@@ -466,6 +489,7 @@
 				D8E3837A225A8CA00023E510 /* FollowLikeCell.swift in Sources */,
 				D8521A41226B933E00ECCF98 /* NotificationCell.swift in Sources */,
 				D8521A43226CF20700ECCF98 /* Notification.swift in Sources */,
+				D8C9039B22B5157F00B5683B /* CommentInputAccesoryView.swift in Sources */,
 				D8E383522258A30C0023E510 /* Extenssions.swift in Sources */,
 				D825D34B2285A8F000E9E01D /* Message.swift in Sources */,
 				D8E3836E225A083F0023E510 /* User.swift in Sources */,

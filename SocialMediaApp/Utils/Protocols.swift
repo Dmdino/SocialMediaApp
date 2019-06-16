@@ -26,11 +26,29 @@ protocol NotificationCellDelegate {
     func handlePostTapped(for cell: NotificationCell)
 }
 
+protocol CommentInputAccesoryViewDelegate {
+    func didSubmit(forComment comment: String)
+}
+
+protocol MessageInputAccesoryViewDelegate {
+    func handleSend()
+}
+
 protocol FollowCellDelegate {
     func handleFollowTapped(for cell: FollowLikeCell)
+}
+
+protocol ChatCellDelegate {
+    func handlePlayVideo(for cell: ChatCell)
+}
+
+protocol MessageCellDelegate {
+    func configureUserData(for cell: MessageCell)
 }
 
 // les 45
 protocol Printable {
     var description: String { get }
 }
+
+

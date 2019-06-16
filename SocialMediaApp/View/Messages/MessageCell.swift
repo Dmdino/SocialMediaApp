@@ -13,6 +13,8 @@ class MessageCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var delegate: MessageCellDelegate?
+    
     var message: Message? {
         
         didSet {

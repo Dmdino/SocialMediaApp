@@ -23,10 +23,13 @@ class NewMessageController: UITableViewController {
         
         configureNavigationbBar()
         
-        fetchUsers()
-        
         // register cell
         tableView.register(NewMessageCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        // removes separator views from unused rows
+        tableView.tableFooterView = UIView(frame: .zero)
+        
+        fetchUsers()
     }
     // MARK: - UITableView
     
