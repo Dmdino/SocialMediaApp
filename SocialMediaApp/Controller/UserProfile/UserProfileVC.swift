@@ -18,12 +18,16 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     var user: User?
     var posts = [Post]()
     var currentKey: String?
+    
+    //MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // UserPostCell cast in cell fore item
         self.collectionView!.register(UserPostCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        configureRefreshControl()
         
         self.collectionView.backgroundColor = .white
 
@@ -98,7 +102,10 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let feedVC = FeedVC(collectionViewLayout: UICollectionViewFlowLayout())
+        
         feedVC.viewSinglePost = true
+        feedVC.userProfileController = self
+        
         feedVC.post = posts[indexPath.item]
         navigationController?.pushViewController(feedVC, animated: true)
         
@@ -123,6 +130,13 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         guard let user = header.user else {return}
         
         if header.editProfileFollowButton.titleLabel?.text == "Edit Profile" {
+          
+            let editProfileController = EditProfileController()
+            editProfileController.user = user
+            editProfileController.userProfileController = self
+            let navigationController = UINavigationController(rootViewController: editProfileController)
+            present(navigationController, animated: true, completion: nil)
+            
         } else {
             
             if header.editProfileFollowButton.titleLabel?.text == "Follow" {
@@ -134,6 +148,21 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             }
         }
         
+    }
+    
+    // MARK: - Hadlers
+    
+    @objc func handleRefresh() {
+        posts.removeAll(keepingCapacity: false)
+        self.currentKey = nil
+        fetchPosts()
+        collectionView.reloadData()
+    }
+    
+    func configureRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView?.refreshControl = refreshControl
     }
     
     // MARK: - API
@@ -170,6 +199,17 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
                 attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
                 
                 header.followingLabel.attributedText = attributedText
+            }
+            
+            // get number of posts
+            USER_POSTS_REF.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+                guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                let postCount = snapshot.count
+                
+                let attributedText = NSMutableAttributedString(string: "\(postCount)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+                attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+                
+                header.postsLabel.attributedText = attributedText
             }
         }
     }

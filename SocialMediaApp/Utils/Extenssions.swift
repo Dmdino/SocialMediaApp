@@ -41,6 +41,7 @@ extension UIButton {
 
 extension Date {
     
+    // take it from stack over flow
     func timeAgoToDisplay() -> String {
         
         let secondsAgo = Int(Date().timeIntervalSince(self))
@@ -78,7 +79,6 @@ extension Date {
     }
     
 }
-
 
 extension UIView {
     

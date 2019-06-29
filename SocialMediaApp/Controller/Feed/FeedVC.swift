@@ -20,6 +20,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     var viewSinglePost = false
     var post: Post?
     var currentKey: String?
+    var userProfileController: UserProfileVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,8 +116,45 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
         navigationController?.pushViewController(userProfileVC, animated: true)
     }
     
-    func handleOptionsTapped(for: FeedCell) {
-        print("handle options tapped")
+    func handleOptionsTapped(for cell: FeedCell) {
+        
+        guard let post = cell.post else {return}
+        
+        if post.ownerUid == Auth.auth().currentUser?.uid {
+            
+            let alertController = UIAlertController(title: "Options", message: nil, preferredStyle: .actionSheet)
+            
+            alertController.addAction(UIAlertAction(title: "Delete Post", style: .destructive, handler: { (_) in
+                
+                // delete post
+                post.deletePost()
+                
+                if !self.viewSinglePost {
+                    self.handleResresh()
+                } else {
+                    if let userProfileController = self.userProfileController {
+                        _ = self.navigationController?.popViewController(animated: true)
+                        userProfileController.handleRefresh()
+                    }
+                }
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Edit Post", style: .default, handler: { (_) in
+                
+                let uploadPostController = UploadPostVC()
+                let navigationController = UINavigationController(rootViewController: uploadPostController)
+                uploadPostController.postToEdit = post
+                uploadPostController.uploadAction = UploadPostVC.UploadAction(index: 1)
+                self.present(navigationController, animated: true, completion: nil)
+
+                
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+        }
         
     }
     
@@ -179,6 +217,13 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     
     //MARK: - Handlers
     
+    @objc func handleCamera() {
+        
+        let cameraController = CameraController()
+        present(cameraController, animated: true, completion: nil)
+        
+    }
+    
     @objc func handleResresh() {
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
@@ -222,7 +267,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     func configureNavigationBar() {
         
         if !viewSinglePost {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         }
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "send2").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleShowMessages))
