@@ -217,6 +217,13 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     
     //MARK: - Handlers
     
+    @objc func handleCamera() {
+        
+        let cameraController = CameraController()
+        present(cameraController, animated: true, completion: nil)
+        
+    }
+    
     @objc func handleResresh() {
         posts.removeAll(keepingCapacity: false)
         self.currentKey = nil
@@ -260,7 +267,7 @@ class FeedVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Fe
     func configureNavigationBar() {
         
         if !viewSinglePost {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         }
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "send2").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleShowMessages))

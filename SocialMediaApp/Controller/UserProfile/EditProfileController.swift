@@ -85,6 +85,16 @@ class EditProfileController: UIViewController {
         return view
     }()
     
+    let logoutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Logout", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        button.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+        
+        return button
+    }()
+    
     // MARK: - Init
     
     override func viewDidLoad() {
@@ -101,6 +111,23 @@ class EditProfileController: UIViewController {
     }
     
     // MARK: - Handlers
+    
+    @objc func handleLogout() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
+            do {
+                try Auth.auth().signOut()
+                let loginVC = LoginVC()
+                let navigationController = UINavigationController(rootViewController: loginVC)
+                self.present(navigationController, animated: true, completion: nil)
+            } catch {
+                print("Failed to log out")
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
     
     @objc func handleChangeProfilePhoto() {
         let imagePickerController = UIImagePickerController()
@@ -173,6 +200,9 @@ class EditProfileController: UIViewController {
         
         view.addSubview(usernameSeparatorView)
         usernameSeparatorView.anchor(top: nil, left: usernameTextField.leftAnchor, bottom: usernameTextField.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -8, paddingRight: 12, width: 0, height: 0.5)
+        
+        view.addSubview(logoutButton)
+        logoutButton.anchor(top: usernameSeparatorView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 16, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 300, height: 50)
     }
     
     func configureNavigationBar() {

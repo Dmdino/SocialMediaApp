@@ -16,9 +16,10 @@ class ChatCell: UICollectionViewCell {
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleViewRightAnchor: NSLayoutConstraint?
     var bubbleViewLeftAnchor: NSLayoutConstraint?
-    
+        
     var message: Message? {
         didSet {
+            
             guard let messageText = message?.messageText else {return}
             textView.text = messageText
             
@@ -88,7 +89,6 @@ class ChatCell: UICollectionViewCell {
         textView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
         textView.rightAnchor.constraint(equalTo: bubbleView.rightAnchor).isActive = true
         textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -200,6 +200,17 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
                 
                 header.followingLabel.attributedText = attributedText
             }
+            
+            // get number of posts
+            USER_POSTS_REF.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+                guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                let postCount = snapshot.count
+                
+                let attributedText = NSMutableAttributedString(string: "\(postCount)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+                attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+                
+                header.postsLabel.attributedText = attributedText
+            }
         }
     }
     

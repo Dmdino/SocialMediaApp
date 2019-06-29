@@ -56,10 +56,15 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
-        
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
+        collectionView.alwaysBounceVertical = true
         collectionView.register(ChatCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.keyboardDismissMode = .interactive
         
         configurenavigationBar()
+        
+        // this allow to hold the bubble message over send button
+        configureKeyboardObservers()
         
         observeMessages()
     }
@@ -124,6 +129,10 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.pushViewController(userProfileController, animated: true)
     }
     
+    @objc func handleKeyboardDidShow() {
+        scrollToBottom()
+    }
+    
     // this is how we created the frame for our textview based on the message what we have (found this on stack overflow)
     func estimateFrameForText(_ text: String) -> CGRect {
         let size = CGSize(width: 200, height: 1000)
@@ -162,6 +171,19 @@ class ChatController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
         
         navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    func configureKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+    }
+    
+    func scrollToBottom() {
+        
+        if messages.count > 0 {
+            let indexPath = IndexPath(item: messages.count - 1, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
+        
     }
     
     // MARK: - API
